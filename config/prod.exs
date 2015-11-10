@@ -56,6 +56,16 @@ config :logger, level: :info
 #     config :flash, Flash.Endpoint, server: true
 #
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
+# In this file, we keep production configuration that
+# you likely want to automate and keep it away from
+# your version control system.
+config :flash, Flash.Endpoint,
+  secret_key_base: "xMG7Lp5mTP47rJ8qjNTqf7MhBfG0d2leqLErlKd/bWgAF++0a4GuYKiMKB6YfVjr"
+
+# Configure your database
+config :flash, Flash.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "flash_prod",
+  pool_size: 20
