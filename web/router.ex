@@ -19,7 +19,7 @@ defmodule Flash.Router do
     get "/", PageController, :index
   end
 
-  scope "/api", Flash do
+  scope "/control", Flash do
     pipe_through :api
 
     post "/change", PageController, :change
