@@ -13,7 +13,7 @@ defmodule Flash do
       worker(Flash.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Flash.Worker, [arg1, arg2, arg3]),
-      worker(Flash.Changer, [])
+      worker(Flash.Manager, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

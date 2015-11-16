@@ -2,7 +2,7 @@ defmodule Flash.RoomChannel do
   use Flash.Web, :channel
 
   def join("rooms:lobby", payload, socket) do
-    {:ok, Flash.Changer.current, socket}
+    {:ok, Flash.Manager.current, socket}
   end
 
   # Channels can be used in a request/response fashion

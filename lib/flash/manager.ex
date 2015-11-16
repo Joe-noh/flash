@@ -1,4 +1,4 @@
-defmodule Flash.Changer do
+defmodule Flash.Manager do
   use GenServer
 
   defstruct code: "#fff", period: 500
