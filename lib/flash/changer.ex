@@ -7,6 +7,10 @@ defmodule Flash.Changer do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  def current do
+    GenServer.call __MODULE__, :current
+  end
+
   def change(code = ("#" <> _), period), do: do_change(       code, period)
   def change(code,              period), do: do_change("#" <> code, period)
 
@@ -16,6 +20,10 @@ defmodule Flash.Changer do
 
   def init(_) do
     {:ok, %__MODULE__{}}
+  end
+
+  def handle_call(:current, _from, state) do
+    {:reply, state, state}
   end
 
   def handle_cast({:change, [code: code, period: period]}, state) do

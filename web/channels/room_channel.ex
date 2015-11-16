@@ -2,11 +2,7 @@ defmodule Flash.RoomChannel do
   use Flash.Web, :channel
 
   def join("rooms:lobby", payload, socket) do
-    if authorized?(payload) do
-      {:ok, socket}
-    else
-      {:error, %{reason: "unauthorized"}}
-    end
+    {:ok, Flash.Changer.current, socket}
   end
 
   # Channels can be used in a request/response fashion
@@ -28,10 +24,5 @@ defmodule Flash.RoomChannel do
   def handle_out(event, payload, socket) do
     push socket, event, payload
     {:noreply, socket}
-  end
-
-  # Add authorization logic here as required.
-  defp authorized?(_payload) do
-    true
   end
 end
