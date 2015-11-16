@@ -1,27 +1,26 @@
 defmodule Flash.Changer do
   use GenServer
 
+  defstruct code: "#fff", period: 500
+
   def start_link do
-    GenServer.start_link(__MODULE__, [])
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  end
+
+  def change(code = ("#" <> _), period), do: do_change(       code, period)
+  def change(code,              period), do: do_change("#" <> code, period)
+
+  defp do_change(code, period) do
+    GenServer.cast __MODULE__, {:change, [code: code, period: period]}
   end
 
   def init(_) do
-    Process.send_after(self, :tick, 4000)
-    {:ok, []}
+    {:ok, %__MODULE__{}}
   end
 
-  def handle_info(:tick, state) do
-    Process.send_after(self, :tick, 4000)
+  def handle_cast({:change, [code: code, period: period]}, state) do
+    Flash.Endpoint.broadcast! "rooms:lobby", "color:change", %{code: code, period: period}
 
-    Flash.Endpoint.broadcast! "rooms:lobby", "color:change", %{code: random_color}
-
-    {:noreply, state}
-  end
-
-  defp random_color do
-    :random.seed(:erlang.now)
-
-    code = ~w[0 1 2 3 4 5 6 7 8 9 a b c d e f] |> Enum.take_random(6)|> Enum.join
-    "#" <> code
+    {:noreply, %{state | code: code, period: period}}
   end
 end
