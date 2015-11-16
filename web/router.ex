@@ -23,5 +23,6 @@ defmodule Flash.Router do
     pipe_through :api
 
     post "/change", PageController, :change
+    post "/sync",   PageController, :sync
   end
 end

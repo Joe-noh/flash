@@ -58,6 +58,7 @@ let channel = socket.channel("rooms:lobby", {})
 let colors = ["#fff", "#fff"];
 let period = 500;
 let cPos = 0;
+let timeoutId;
 
 const colorChange = (c, p) => {
   colors = ["#fff", c];
@@ -70,21 +71,27 @@ channel.on("color:change", (params) => {
   colorChange(params.code, params.period);
 });
 
+channel.on("color:sync", () => {
+  window.clearTimeout(timeoutId);
+  $('body').css({ backgroundColor: "#fff" });
+  swapC();
+})
+
 channel.join()
   .receive("ok", (resp) => {
     console.log("Joined successfully");
 
     colorChange(resp.code, resp.period);
   })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("error", resp => { console.log("Unable to join", resp) });
 
 function swapC() {
-  $('body').animate({ backgroundColor:colors[cPos] }, period)
-  cPos++
+  $('body').animate({ backgroundColor: colors[cPos] }, period);
+  cPos++;
   if (cPos == colors.length) {
-    cPos = 0
+    cPos = 0;
   }
-  window.setTimeout(function() { swapC() }, period)
+  timeoutId = window.setTimeout(function() { swapC() }, period);
 }
 
 $(document).ready(() => {

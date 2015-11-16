@@ -18,6 +18,10 @@ defmodule Flash.Manager do
     GenServer.cast __MODULE__, {:change, [code: code, period: period]}
   end
 
+  def sync do
+    GenServer.cast __MODULE__, :sync
+  end
+
   def init(_) do
     {:ok, %__MODULE__{}}
   end
@@ -30,5 +34,11 @@ defmodule Flash.Manager do
     Flash.Endpoint.broadcast! "rooms:lobby", "color:change", %{code: code, period: period}
 
     {:noreply, %{state | code: code, period: period}}
+  end
+
+  def handle_cast(:sync, state) do
+    Flash.Endpoint.broadcast! "rooms:lobby", "color:sync", %{}
+
+    {:noreply, state}
   end
 end
