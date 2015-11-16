@@ -56,6 +56,7 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("rooms:lobby", {})
 let colors = ["#fff", "#fff"];
+let period = 500;
 let cPos = 0;
 
 channel.on("color:change", (params) => {
@@ -64,6 +65,7 @@ channel.on("color:change", (params) => {
   //$('body').animate({backgroundColor: params.code});
 
   colors = ["#fff", params.code];
+  period = params.period
 });
 
 channel.join()
@@ -71,12 +73,12 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 function swapC() {
-  $('body').animate({ backgroundColor:colors[cPos] }, 500)
+  $('body').animate({ backgroundColor:colors[cPos] }, period)
   cPos++
   if (cPos == colors.length) {
     cPos = 0
   }
-  window.setTimeout(function() { swapC() }, 500)
+  window.setTimeout(function() { swapC() }, period)
 }
 
 $(document).ready(() => {

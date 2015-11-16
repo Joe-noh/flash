@@ -19,8 +19,9 @@ defmodule Flash.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Flash do
-  #   pipe_through :api
-  # end
+  scope "/control", Flash do
+    pipe_through :api
+
+    post "/change", PageController, :change
+  end
 end
