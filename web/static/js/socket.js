@@ -59,17 +59,23 @@ let colors = ["#fff", "#fff"];
 let period = 500;
 let cPos = 0;
 
+const colorChange = (c, p) => {
+  colors = ["#fff", c];
+  period = p;
+};
+
 channel.on("color:change", (params) => {
   console.log(params);
 
-  //$('body').animate({backgroundColor: params.code});
-
-  colors = ["#fff", params.code];
-  period = params.period
+  colorChange(params.code, params.period);
 });
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", (resp) => {
+    console.log("Joined successfully");
+
+    colorChange(resp.code, resp.period);
+  })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 function swapC() {

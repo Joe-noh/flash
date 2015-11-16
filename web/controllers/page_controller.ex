@@ -6,7 +6,7 @@ defmodule Flash.PageController do
   end
 
   def change(conn, %{"code" => code, "period" => period}) do
-    Flash.Changer.change(code, period)
+    Flash.Manager.change(code, period)
 
     conn
     |> put_status(201)
