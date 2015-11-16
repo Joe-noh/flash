@@ -19,3 +19,63 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+
+class Flash {
+  constructor() {
+    this.colors = ["#fff", "#fff"];
+    this.period = 500;
+    this.colorPosition = 0;
+    this.timeoutId;
+  }
+
+  colorChange(c, p) {
+    this.colors = ["#fff", c];
+    this.period = p;
+  }
+
+  restartAnimation() {
+    window.clearTimeout(this.timeoutId);
+    $('body').stop();
+    $('body').css({ backgroundColor: "#fff" });
+    this.colorPosition = 0;
+    this.startAnimation();
+  }
+
+  startAnimation() {
+    $('body').animate({ backgroundColor: this.colors[this.colorPosition] }, this.period);
+    this.colorPosition++;
+    if (this.colorPosition == this.colors.length) {
+      this.colorPosition = 0;
+    }
+    this.timeoutId = window.setTimeout(
+      () => { this.startAnimation() },
+      this.period
+    );
+  }
+}
+
+$(document).ready(() => {
+  const flash = new Flash();
+  const channel = socket.channel("rooms:lobby", {});
+
+  channel.on("color:change", (params) => {
+    console.log(params);
+
+    flash.colorChange(params.code, params.period);
+    flash.restartAnimation();
+  });
+
+  channel.on("color:sync", () => {
+    flash.restartAnimation();
+  });
+
+  channel.join()
+    .receive("ok", (resp) => {
+      console.log("Joined successfully");
+
+      flash.colorChange(resp.code, resp.period);
+    })
+    .receive("error", resp => { console.log("Unable to join", resp) });
+
+  flash.startAnimation();
+});
