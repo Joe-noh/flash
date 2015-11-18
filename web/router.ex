@@ -24,5 +24,6 @@ defmodule Flash.Router do
 
     post "/change", PageController, :change
     post "/sync",   PageController, :sync
+    post "/delay",  PageController, :delay
   end
 end

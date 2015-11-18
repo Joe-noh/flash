@@ -54,8 +54,43 @@ class Flash {
   }
 }
 
+class Alarm {
+  constructor(flash) {
+    this.flash = flash;
+    this.triggerTime = null;
+    this.nextColor;
+    this.nextPeriod;
+  }
+
+  register(unixtime) {
+    this.triggerTime = unixtime;
+    this.tick();
+  }
+
+  set(code, period) {
+    this.nextColor  = code;
+    this.nextPeriod = period;
+  }
+
+  tick() {
+    if (this.triggerTime == null) { return; }
+
+    const now = Math.floor(new Date().getTime() / 1000);
+
+    if (this.triggerTime < now) {
+      this.flash.colorChange(this.nextColor, this.nextPeriod);
+      this.flash.restartAnimation();
+    } else {
+      console.log(this.triggerTime - now);
+      window.setTimeout(() => { this.tick() }, 50);
+    }
+  }
+}
+
 $(document).ready(() => {
   const flash = new Flash();
+  const alarm = new Alarm(flash);
+  alarm.tick();
   const channel = socket.channel("rooms:lobby", {});
 
   channel.on("color:change", (params) => {
@@ -69,13 +104,19 @@ $(document).ready(() => {
     flash.restartAnimation();
   });
 
+  channel.on("timestamp", (params) => {
+    console.log(params);
+    alarm.set(params.code, params.period);
+    alarm.register(params.unixtime);
+  });
+
   channel.join()
     .receive("ok", (resp) => {
       console.log("Joined successfully");
 
-      flash.colorChange(resp.code, resp.period);
+      // flash.colorChange(resp.code, resp.period);
     })
     .receive("error", resp => { console.log("Unable to join", resp) });
 
-  flash.startAnimation();
+//  flash.startAnimation();
 });

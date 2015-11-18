@@ -16,4 +16,14 @@ defmodule Flash.PageController do
 
     conn |> put_status(201) |> json ""
   end
+
+  def delay(conn, %{"delay" => delay, "code" => code, "period" => period}) do
+    Flash.Manager.set_alarm(
+      delay,
+      code,
+      String.to_integer(period)
+    )
+
+    conn |> put_status(201) |> json ""
+  end
 end
