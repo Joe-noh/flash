@@ -15,11 +15,16 @@ defmodule Flash.Manager do
   def change(code,              period), do: do_change("#" <> code, period)
 
   defp do_change(code, period) do
-    GenServer.cast __MODULE__, {:change, [code: code, period: period]}
+    GenServer.cast __MODULE__, {:change, %{code: code, period: period}}
   end
 
   def sync do
     GenServer.cast __MODULE__, :sync
+  end
+
+  def set_alarm(delay, code, period) do
+    unixtime = delay + :os.system_time(:seconds)
+    GenServer.cast __MODULE__, {:alarm, %{unixtime: unixtime, code: code, period: period}}
   end
 
   def init(_) do
@@ -30,8 +35,8 @@ defmodule Flash.Manager do
     {:reply, state, state}
   end
 
-  def handle_cast({:change, [code: code, period: period]}, state) do
-    Flash.Endpoint.broadcast! "rooms:lobby", "color:change", %{code: code, period: period}
+  def handle_cast({:change, params = %{code: code, period: period}}, state) do
+    Flash.Endpoint.broadcast! "rooms:lobby", "color:change", params
 
     {:noreply, %{state | code: code, period: period}}
   end
@@ -40,5 +45,11 @@ defmodule Flash.Manager do
     Flash.Endpoint.broadcast! "rooms:lobby", "color:sync", %{}
 
     {:noreply, state}
+  end
+
+  def handle_cast({:alarm, params}, state = %{code: code, period: period}) do
+    Flash.Endpoint.broadcast! "rooms:lobby", "timestamp", params
+
+    {:noreply, %{state | code: code, period: period}}
   end
 end
