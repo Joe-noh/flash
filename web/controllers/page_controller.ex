@@ -19,7 +19,7 @@ defmodule Flash.PageController do
 
   def delay(conn, %{"delay" => delay, "code" => code, "period" => period}) do
     Flash.Manager.set_alarm(
-      delay,
+      String.to_integer(delay),
       code,
       String.to_integer(period)
     )
