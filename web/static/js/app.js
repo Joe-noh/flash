@@ -116,9 +116,14 @@ $(document).ready(() => {
     .receive("ok", (resp) => {
       console.log("Joined successfully");
 
-      noSleep.enable();
-
       // flash.colorChange(resp.code, resp.period);
     })
     .receive("error", resp => { console.log("Unable to join", resp) });
 });
+
+function enableNoSleep() {
+  noSleep.enable();
+  document.removeEventListener('touchstart', enableNoSleep, false);
+}
+
+document.addEventListener('touchstart', enableNoSleep, false);
