@@ -87,6 +87,8 @@ class Alarm {
   }
 }
 
+let noSleep = new NoSleep();
+
 $(document).ready(() => {
   const flash = new Flash();
   const alarm = new Alarm(flash);
@@ -114,9 +116,9 @@ $(document).ready(() => {
     .receive("ok", (resp) => {
       console.log("Joined successfully");
 
+      noSleep.enable();
+
       // flash.colorChange(resp.code, resp.period);
     })
     .receive("error", resp => { console.log("Unable to join", resp) });
-
-//  flash.startAnimation();
 });
