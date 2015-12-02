@@ -11,4 +11,9 @@ defmodule Flash.RoomChannel do
     broadcast socket, "pong", %{}
     {:noreply, socket}
   end
+
+  def handle_in("color:change", %{"code" => code}, socket) do
+    Flash.Manager.change(code, 1000)
+    {:noreply, socket}
+  end
 end

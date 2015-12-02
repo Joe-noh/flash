@@ -117,6 +117,10 @@ $(document).ready(() => {
     alarm.register(params.unixtime);
   });
 
+  channel.on("pong", () => {
+    console.log("got pong");
+  });
+
   channel.join()
     .receive("ok", (resp) => {
       console.log("Joined successfully");
@@ -132,5 +136,4 @@ $('#start-button').click((e) => {
   $(e.target).hide();
 
   noSleep.enable();
-  channel.push("ping", {});
 });

@@ -1,1 +1,9 @@
 <h1>controller</h1>
+
+<button id="ping">PING</button>
+
+<br />
+
+<input type="text" id="color-code" /><button id="color-code-button">SEND</button>
+
+<script src="<%= static_path(@conn, "/js/controller.js") %>"></script>
