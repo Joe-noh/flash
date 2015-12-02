@@ -1,3 +1,6 @@
-<button id="start-button">START</button>
+<div id="board">
+  qaaaa
+  <button id="start-button">START</button>
+</div>
 
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

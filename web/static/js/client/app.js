@@ -103,12 +103,17 @@ $(document).ready(() => {
     // flash.colorChange(params.code, params.period);
     // flash.restartAnimation();
 
-    $('body').css('background-color', params.code);
+    $('#board').css('background-color', params.code);
     appender.append(params.code);
   });
 
   channel.on("color:sync", () => {
     flash.restartAnimation();
+  });
+
+  channel.on("opacity:change", (params) => {
+    console.log(params);
+    $('#board').css('opacity', params.opacity);
   });
 
   channel.on("timestamp", (params) => {

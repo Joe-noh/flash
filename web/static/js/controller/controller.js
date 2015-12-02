@@ -24,5 +24,11 @@ $(document).ready(() => {
 
     let code = $('#color-code').val();
     channel.push("color:change", {code: code});
-  })
+  });
+
+  $('#opacity-range').on('input', (e) => {
+    let opacity = e.target.value / 100;
+    console.log(opacity);
+    channel.push("opacity:change", {opacity: opacity});
+  });
 });

@@ -21,4 +21,9 @@ defmodule Flash.RoomChannel do
     Flash.Manager.change(code, 1000)
     {:noreply, socket}
   end
+
+  def handle_in("opacity:change", %{"opacity" => opacity}, socket) do
+    Flash.Manager.opacity(opacity)
+    {:noreply, socket}
+  end
 end

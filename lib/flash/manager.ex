@@ -1,7 +1,7 @@
 defmodule Flash.Manager do
   use GenServer
 
-  defstruct code: "#fff", period: 500
+  defstruct code: "#fff", period: 500, opacity: 0
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -16,6 +16,10 @@ defmodule Flash.Manager do
 
   defp do_change(code, period) do
     GenServer.cast __MODULE__, {:change, %{code: code, period: period}}
+  end
+
+  def opacity(opacity) do
+    GenServer.cast __MODULE__, {:opacity, %{opacity: opacity}}
   end
 
   def sync do
@@ -45,6 +49,12 @@ defmodule Flash.Manager do
     Flash.Endpoint.broadcast! "rooms:lobby", "color:sync", %{}
 
     {:noreply, state}
+  end
+
+  def handle_cast({:opacity, %{opacity: opacity}}, state) do
+    Flash.Endpoint.broadcast! "rooms:lobby", "opacity:change", %{opacity: opacity}
+
+    {:noreply, %{state | opacity: opacity}}
   end
 
   def handle_cast({:alarm, params}, state = %{code: code, period: period}) do
