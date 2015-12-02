@@ -88,12 +88,12 @@ class Alarm {
 }
 
 let noSleep = new NoSleep();
+let channel = socket.channel("rooms:lobby", {});
 
 $(document).ready(() => {
   const flash = new Flash();
   const alarm = new Alarm(flash);
   alarm.tick();
-  const channel = socket.channel("rooms:lobby", {});
 
   channel.on("color:change", (params) => {
     console.log(params);
@@ -124,6 +124,8 @@ function enableNoSleep() {
 }
 
 $('#start-button').click((e) => {
-  noSleep.enable();
   $(e.target).hide();
+
+  noSleep.enable();
+  channel.push("ping", {});
 });
