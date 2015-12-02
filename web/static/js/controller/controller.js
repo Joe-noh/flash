@@ -16,7 +16,7 @@ $(document).ready(() => {
   $('#ping').click((e) => {
     e.preventDefault();
 
-    channel.push("ping", {});
+    channel.push("ping:all", {});
   });
 
   $('#color-code-button').click((e) => {

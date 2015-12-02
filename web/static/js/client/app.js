@@ -117,8 +117,9 @@ $(document).ready(() => {
     alarm.register(params.unixtime);
   });
 
-  channel.on("pong", () => {
-    console.log("got pong");
+  channel.on("ping", () => {
+    channel.push("pong", {});
+    console.log("got ping. replied pong");
   });
 
   channel.join()
