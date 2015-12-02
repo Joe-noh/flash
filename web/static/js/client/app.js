@@ -90,7 +90,7 @@ class Alarm {
 
 let noSleep = new NoSleep();
 let channel = socket.channel("rooms:lobby", {});
-let appender = new Appender($('body'));
+let appender = new Appender($('#log'));
 
 $(document).ready(() => {
   const flash = new Flash();

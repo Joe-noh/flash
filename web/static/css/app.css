@@ -24,3 +24,10 @@ html, body, #board {
   left: 50%;
   margin-left: -4em;
 }
+
+#log {
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+}
