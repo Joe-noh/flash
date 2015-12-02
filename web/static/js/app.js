@@ -19,6 +19,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+import Appender from "./appender"
 
 class Flash {
   constructor() {
@@ -89,6 +90,7 @@ class Alarm {
 
 let noSleep = new NoSleep();
 let channel = socket.channel("rooms:lobby", {});
+let appender = new Appender($('body'));
 
 $(document).ready(() => {
   const flash = new Flash();
@@ -98,8 +100,11 @@ $(document).ready(() => {
   channel.on("color:change", (params) => {
     console.log(params);
 
-    flash.colorChange(params.code, params.period);
-    flash.restartAnimation();
+    // flash.colorChange(params.code, params.period);
+    // flash.restartAnimation();
+
+    $('body').css('background-color', params.code);
+    appender.append(params.code);
   });
 
   channel.on("color:sync", () => {
