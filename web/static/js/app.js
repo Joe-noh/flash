@@ -87,6 +87,8 @@ class Alarm {
   }
 }
 
+let noSleep = new NoSleep();
+
 $(document).ready(() => {
   const flash = new Flash();
   const alarm = new Alarm(flash);
@@ -113,10 +115,15 @@ $(document).ready(() => {
   channel.join()
     .receive("ok", (resp) => {
       console.log("Joined successfully");
-
-      // flash.colorChange(resp.code, resp.period);
     })
     .receive("error", resp => { console.log("Unable to join", resp) });
+});
 
-//  flash.startAnimation();
+function enableNoSleep() {
+  $('#start-button').removeEventListener('touchstart', enableNoSleep, false);
+}
+
+$('#start-button').click((e) => {
+  noSleep.enable();
+  $(e.target).hide();
 });
