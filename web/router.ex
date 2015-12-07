@@ -17,6 +17,7 @@ defmodule Flash.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/controller", PageController, :controller
   end
 
   scope "/control", Flash do

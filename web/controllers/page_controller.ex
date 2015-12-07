@@ -5,6 +5,10 @@ defmodule Flash.PageController do
     render conn, "index.html"
   end
 
+  def controller(conn, _params) do
+    render conn, "controller.html"
+  end
+
   def change(conn, %{"code" => code, "period" => period}) do
     Flash.Manager.change(code, period)
 

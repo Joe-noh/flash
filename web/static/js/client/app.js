@@ -18,7 +18,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import socket from "./socket"
+import socket from "../shared/socket"
 import Appender from "./appender"
 
 class Flash {
@@ -90,7 +90,7 @@ class Alarm {
 
 let noSleep = new NoSleep();
 let channel = socket.channel("rooms:lobby", {});
-let appender = new Appender($('body'));
+let appender = new Appender($('#log'));
 
 $(document).ready(() => {
   const flash = new Flash();
@@ -103,7 +103,7 @@ $(document).ready(() => {
     // flash.colorChange(params.code, params.period);
     // flash.restartAnimation();
 
-    $('body').css('background-color', params.code);
+    $('#board').css('background-color', params.code);
     appender.append(params.code);
   });
 
@@ -111,10 +111,20 @@ $(document).ready(() => {
     flash.restartAnimation();
   });
 
+  channel.on("opacity:change", (params) => {
+    console.log(params);
+    $('#board').css('opacity', params.opacity);
+  });
+
   channel.on("timestamp", (params) => {
     console.log(params);
     alarm.set(params.code, params.period);
     alarm.register(params.unixtime);
+  });
+
+  channel.on("ping", () => {
+    channel.push("pong", {});
+    console.log("got ping. replied pong");
   });
 
   channel.join()
@@ -132,5 +142,4 @@ $('#start-button').click((e) => {
   $(e.target).hide();
 
   noSleep.enable();
-  channel.push("ping", {});
 });
