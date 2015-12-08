@@ -22,28 +22,43 @@ import socket from "../shared/socket"
 import Appender from "./appender"
 
 class Flash {
-  constructor() {
+  constructor(selector) {
+    this.element = $(selector);
     this.colors = ["#fff", "#fff"];
     this.period = 500;
     this.colorPosition = 0;
     this.timeoutId;
   }
 
+  setColor1(color) {
+    this.colors[0] = color;
+  }
+
+  setColor2(color) {
+    this.colors[1] = color;
+  }
+
+  setPeriod(period) {
+    this.period = period;
+  }
+
   colorChange(c, p) {
     this.colors = ["#fff", c];
-    this.period = p;
+    if (p) {
+      this.period = p;
+    }
   }
 
   restartAnimation() {
     window.clearTimeout(this.timeoutId);
-    $('body').stop();
-    $('body').css({ backgroundColor: "#fff" });
+    this.element.stop();
+    this.element.css({ backgroundColor: "#fff" });
     this.colorPosition = 0;
     this.startAnimation();
   }
 
   startAnimation() {
-    $('body').animate({ backgroundColor: this.colors[this.colorPosition] }, this.period);
+    this.element.animate({ backgroundColor: this.colors[this.colorPosition] }, this.period);
     this.colorPosition++;
     if (this.colorPosition == this.colors.length) {
       this.colorPosition = 0;
@@ -55,48 +70,13 @@ class Flash {
   }
 }
 
-class Alarm {
-  constructor(flash) {
-    this.flash = flash;
-    this.triggerTime = null;
-    this.nextColor;
-    this.nextPeriod;
-  }
-
-  register(unixtime) {
-    this.triggerTime = unixtime;
-    this.tick();
-  }
-
-  set(code, period) {
-    this.nextColor  = code;
-    this.nextPeriod = period;
-  }
-
-  tick() {
-    if (this.triggerTime == null) { return; }
-
-    const now = Math.floor(new Date().getTime() / 1000);
-
-    if (this.triggerTime < now) {
-      this.flash.colorChange(this.nextColor, this.nextPeriod);
-      this.flash.restartAnimation();
-    } else {
-      console.log(this.triggerTime - now);
-      window.setTimeout(() => { this.tick() }, 50);
-    }
-  }
-}
-
 let noSleep = new NoSleep();
 let channel = socket.channel("rooms:lobby", {});
 let appender = new Appender($('#log'));
 
-$(document).ready(() => {
-  const flash = new Flash();
-  const alarm = new Alarm(flash);
-  alarm.tick();
+const flash = new Flash('body');
 
+$(document).ready(() => {
   channel.on("color:change", (params) => {
     console.log(params);
 
@@ -114,12 +94,6 @@ $(document).ready(() => {
   channel.on("opacity:change", (params) => {
     console.log(params);
     $('#board').css('opacity', params.opacity);
-  });
-
-  channel.on("timestamp", (params) => {
-    console.log(params);
-    alarm.set(params.code, params.period);
-    alarm.register(params.unixtime);
   });
 
   channel.on("ping", () => {
@@ -140,6 +114,12 @@ function enableNoSleep() {
 
 $('#start-button').click((e) => {
   $(e.target).hide();
+
+  flash.setColor1("#269");
+  flash.setColor2("#931");
+  flash.setPeriod(1000);
+
+  flash.restartAnimation();
 
   noSleep.enable();
 });
