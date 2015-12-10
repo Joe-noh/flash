@@ -5,13 +5,13 @@ import socket from "../shared/socket";
 let channel = socket.channel("rooms:lobby", {operator: true});
 
 $(document).ready(() => {
-  channel.on('current', (params) => {
+  channel.on("current", (params) => {
     console.log(params);
 
-    channel.push('current:ok', {});
+    channel.push("current:ok", {});
   });
 
-  channel.on("recipe", (recipe) => {
+  channel.on("scores", (recipe) => {
     console.log(recipe);
   });
 

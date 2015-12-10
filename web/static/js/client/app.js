@@ -77,30 +77,6 @@ let appender = new Appender($('#log'));
 const flash = new Flash('body');
 
 $(document).ready(() => {
-  channel.on("color:change", (params) => {
-    console.log(params);
-
-    // flash.colorChange(params.code, params.period);
-    // flash.restartAnimation();
-
-    $('#board').css('background-color', params.code);
-    appender.append(params.code);
-  });
-
-  channel.on("color:sync", () => {
-    flash.restartAnimation();
-  });
-
-  channel.on("opacity:change", (params) => {
-    console.log(params);
-    $('#board').css('opacity', params.opacity);
-  });
-
-  channel.on("ping", () => {
-    channel.push("pong", {});
-    console.log("got ping. replied pong");
-  });
-
   channel.on("current", (params) => {
     // 現在の指示
     console.log(params);

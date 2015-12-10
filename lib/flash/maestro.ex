@@ -1,7 +1,9 @@
 defmodule Flash.Maestro do
   use GenServer
 
-  def start_link(scores, offset) do
+  @room "rooms:lobby"
+
+  def start_link(scores, offset \\ 0) do
     GenServer.start_link(__MODULE__, [scores, offset])
   end
 
@@ -10,9 +12,10 @@ defmodule Flash.Maestro do
   end
 
   def init([scores, offset]) do
-    me = self
-    Enum.each scores, fn (score) ->
-      Process.send_after(me, {:score, score.detail}, score.start_at)
+    scores
+    |> Enum.drop(offset)
+    |> Enum.each fn (score) ->
+      Process.send_after(self, {:score, score.detail}, score.start_at)
     end
 
     {:ok, nil}
@@ -23,11 +26,11 @@ defmodule Flash.Maestro do
   end
 
   def handle_info({:score, detail}, state) do
-    Flash.Endpoint.broadcast!("rooms:lobby", "current", detail)
+    Flash.Endpoint.broadcast!(@room, "current", detail)
     {:noreply, state}
   end
 
-  # def handle_info(_, state) do
-  #   {:noreply, state}
-  # end
+  def handle_info(_, state) do
+    {:noreply, state}
+  end
 end
