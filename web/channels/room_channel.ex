@@ -1,8 +1,20 @@
 defmodule Flash.RoomChannel do
   use Flash.Web, :channel
 
-  def join("rooms:lobby", _payload, socket) do
+  @room "rooms:lobby"
+
+  def join(@room, %{"operator" => false}, socket) do
     {:ok, %{}, socket}
+  end
+
+  def join(@room, %{"operator" => true}, socket) do
+    {:ok, Flash.Manager.scores, socket}
+  end
+
+  def handle_in("start", params, socket) do
+    params |> Map.get("offset", 0) |> Flash.Manager.start_live()
+
+    {:noreply, socket}
   end
 
   def handle_in(_, _, socket) do

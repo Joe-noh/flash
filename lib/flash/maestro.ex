@@ -12,10 +12,12 @@ defmodule Flash.Maestro do
   end
 
   def init([scores, offset]) do
+    forward_sec = Enum.at(scores, offset).start_at
+
     scores
     |> Enum.drop(offset)
     |> Enum.each fn (score) ->
-      Process.send_after(self, {:score, score.detail}, score.start_at)
+      Process.send_after(self, {:score, score.detail}, score.start_at - forward_sec)
     end
 
     {:ok, nil}

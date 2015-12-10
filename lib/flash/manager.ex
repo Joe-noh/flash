@@ -17,6 +17,8 @@ defmodule Flash.Manager do
     GenServer.cast __MODULE__, {:start_live, offset}
   end
 
+  def scores(), do: @scores
+
   def init(_) do
     {:ok, %__MODULE__{}}
   end
