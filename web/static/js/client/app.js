@@ -71,41 +71,22 @@ class Flash {
 }
 
 let noSleep = new NoSleep();
-let channel = socket.channel("rooms:lobby", {});
+let channel = socket.channel("rooms:lobby", {operator: false});
 let appender = new Appender($('#log'));
 
 const flash = new Flash('body');
 
 $(document).ready(() => {
-  channel.on("color:change", (params) => {
+  channel.on("current", (params) => {
+    // 現在の指示
     console.log(params);
 
-    // flash.colorChange(params.code, params.period);
-    // flash.restartAnimation();
-
-    $('#board').css('background-color', params.code);
-    appender.append(params.code);
-  });
-
-  channel.on("color:sync", () => {
-    flash.restartAnimation();
-  });
-
-  channel.on("opacity:change", (params) => {
-    console.log(params);
-    $('#board').css('opacity', params.opacity);
-  });
-
-  channel.on("ping", () => {
-    channel.push("pong", {});
-    console.log("got ping. replied pong");
+    channel.push("current:ok", {});
   });
 
   channel.join()
-    .receive("ok", (resp) => {
-      console.log("Joined successfully");
-    })
-    .receive("error", resp => { console.log("Unable to join", resp) });
+    .receive("ok",    (resp) => { console.log("Joined successfully"); })
+    .receive("error", (resp) => { console.log("Unable to join", resp) });
 });
 
 function enableNoSleep() {
@@ -115,11 +96,7 @@ function enableNoSleep() {
 $('#start-button').click((e) => {
   $(e.target).hide();
 
-  flash.setColor1("#269");
-  flash.setColor2("#931");
-  flash.setPeriod(1000);
-
-  flash.restartAnimation();
+  // flash.restartAnimation();
 
   noSleep.enable();
 });
