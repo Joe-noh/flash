@@ -1,12 +1,10 @@
 defmodule Flash.RoomChannel do
   use Flash.Web, :channel
 
-  def join("rooms:lobby", payload, socket) do
+  def join("rooms:lobby", _payload, socket) do
     {:ok, Flash.Manager.current, socket}
   end
 
-  # Channels can be used in a request/response fashion
-  # by sending replies to requests from the client
   def handle_in("ping:all", _payload, socket) do
     broadcast socket, "ping", %{}
     {:noreply, socket}
@@ -24,6 +22,10 @@ defmodule Flash.RoomChannel do
 
   def handle_in("opacity:change", %{"opacity" => opacity}, socket) do
     Flash.Manager.opacity(opacity)
+    {:noreply, socket}
+  end
+
+  def handle_in(_, _, socket) do
     {:noreply, socket}
   end
 end

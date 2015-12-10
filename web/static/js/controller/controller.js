@@ -15,7 +15,7 @@ $(document).ready(() => {
     console.log(recipe);
   });
 
-  channel.on("start:ok", ()) => {
+  channel.on("start:ok", () => {
     console.log("started");
   });
 
