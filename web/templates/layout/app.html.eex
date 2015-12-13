@@ -8,7 +8,11 @@
     <meta name="author" content="">
 
     <title>FLASH</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <%= if Phoenix.Controller.action_name(@conn) == :controller do %>
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/controller.css") %>">
+    <% else %>
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <% end %>
   </head>
 
   <body>
