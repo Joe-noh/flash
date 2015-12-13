@@ -1,4 +1,19 @@
-<h1>controller</h1>
+<div class="container">
+  <h2>SCORES</h2>
 
-<div id="scores"></div>
+  <p>行をクリックするとそこからリスタートするのである。右端のカラーコードはクリックしてはならないのだ。</p>
+
+  <table id="score-table" border="1">
+    <thead>
+      <tr align="right">
+        <td>Start At</td>
+        <td>Type</td>
+        <td>Color</td>
+      </tr>
+    </thead>
+    <tbody id="scores">
+    </tbody>
+  </table>
+</div>
+
 <script src="<%= static_path(@conn, "/js/controller.js") %>"></script>

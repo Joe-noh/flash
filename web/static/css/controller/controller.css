@@ -1,0 +1,17 @@
+html {
+  font-family: Menlo;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#score-table {
+  width: 50%;
+  cursor: pointer;
+}
+
+.color-cell span {
+  background-color: white;
+}
