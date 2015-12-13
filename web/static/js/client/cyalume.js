@@ -3,22 +3,24 @@ class Cyalume {
     this.dom = $(selector);
   }
 
-  fades(colorCode, period) {
-    this.dom.removeClass();
-    this.dom.stop();
-    this.dom.animate({backgroundColor: colorCode}, period);
+  fades(colorCode, duration) {
+    this._cancel();
+    this.dom.animate({backgroundColor: colorCode}, duration);
   }
 
   switches(colorCode) {
-    this.dom.removeClass();
-    this.dom.stop();
+    this._cancel();
     this.dom.css('backgroundColor', colorCode);
   }
 
-  rainbow() {
+  rainbows() {
+    this._cancel();
+    this.dom.addClass('rainbow');
+  }
+
+  _cancel() {
     this.dom.removeClass();
     this.dom.stop();
-    this.dom.addClass('rainbow');
   }
 };
 

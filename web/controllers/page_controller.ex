@@ -9,8 +9,8 @@ defmodule Flash.PageController do
     render conn, "controller.html"
   end
 
-  def change(conn, %{"code" => code, "period" => period}) do
-    Flash.Manager.change(code, period)
+  def change(conn, %{"code" => code, "duration" => duration}) do
+    Flash.Manager.change(code, duration)
 
     conn |> put_status(201) |> json ""
   end
@@ -21,11 +21,11 @@ defmodule Flash.PageController do
     conn |> put_status(201) |> json ""
   end
 
-  def delay(conn, %{"delay" => delay, "code" => code, "period" => period}) do
+  def delay(conn, %{"delay" => delay, "code" => code, "duration" => duration}) do
     Flash.Manager.set_alarm(
       String.to_integer(delay),
       code,
-      String.to_integer(period)
+      String.to_integer(duration)
     )
 
     conn |> put_status(201) |> json ""

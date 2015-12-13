@@ -14,13 +14,13 @@ $(document).ready(() => {
 
     switch(params.type) {
     case "fade":
-      cyalume.fades(params.color, params.code);
+      cyalume.fades(params.color, params.duration);
       break;
     case "switch":
       cyalume.switches(params.color);
       break;
     case "rainbow":
-      cyalume.rainbow();
+      cyalume.rainbows();
       break;
     default:
       console.log("unsupported message", params);
@@ -40,8 +40,5 @@ function enableNoSleep() {
 
 $('#start-button').click((e) => {
   $(e.target).hide();
-
-  // flash.restartAnimation();
-
   noSleep.enable();
 });
