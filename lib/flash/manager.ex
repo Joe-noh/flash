@@ -2,9 +2,11 @@ defmodule Flash.Manager do
   use GenServer
 
   @scores [
-    %{start_at:    10, detail: %{type: :fade, color: "#144", period: 1000}},
-    %{start_at: 10000, detail: %{type: :fade, color: "#244", period: 1000}},
-    %{start_at: 20000, detail: %{type: :fade, color: "#344", period: 1000}}
+    %{start_at:    10, detail: %{type: :fade, color: "#144", duration: 1000}},
+    %{start_at:  5000, detail: %{type: :switch, color: "#944"}},
+    %{start_at: 10000, detail: %{type: :fade, color: "#000", duration: 10000}},
+    %{start_at: 20000, detail: %{type: :fade, color: "#fff", duration: 10000}},
+    %{start_at: 30000, detail: %{type: :rainbow}}
   ]
 
   defstruct maestro: nil
