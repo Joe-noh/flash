@@ -20,6 +20,7 @@ class Cyalume {
 
   _cancel() {
     this.dom.removeClass();
+    this.dom.removeAttr('style');
     this.dom.stop();
   }
 };

@@ -1,4 +1,4 @@
-<div id="board" class="rainbow">
+<div id="board">
   <button id="start-button">START</button>
 </div>
 

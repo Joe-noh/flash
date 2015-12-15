@@ -14,8 +14,8 @@ use Mix.Config
 config :flash, Flash.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "flash-light.herokuapp.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/manifest.json"
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]#,
+  #cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
