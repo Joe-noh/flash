@@ -61,6 +61,7 @@ exports.config = {
       ignore: [/web\/static\/vendor/]
     },
     cleancss: {
+      advanced: false,
       aggressiveMerging: false
     }
   },
