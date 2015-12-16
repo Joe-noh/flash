@@ -14,11 +14,16 @@ defmodule Flash.Manager do
     %{start_at:  3000, detail: %{type: :switch, color: yellow}},
     %{start_at:  4000, detail: %{type: :switch, color: white}},
     %{start_at:  5000, detail: %{type: :switch, color: yellow}},
-    %{start_at:  6000, detail: %{type: :fade,   color: pink,   duration: 2000}},
-    %{start_at:  8000, detail: %{type: :fade,   color: white,  duration: 4000}},
-    %{start_at: 12000, detail: %{type: :fade,   color: yellow, duration: 4000}},
-    %{start_at: 13000, detail: %{type: :fade,   color: black,  duration: 1000}},
-    %{start_at: 14000, detail: %{type: :rainbow}}
+    %{start_at:  6000, detail: %{type: :switch, color: white}},
+    %{start_at:  7000, detail: %{type: :switch, color: yellow}},
+    %{start_at:  8000, detail: %{type: :switch, color: white}},
+    %{start_at:  9000, detail: %{type: :switch, color: yellow}},
+    %{start_at: 10000, detail: %{type: :fade,   color: pink,   duration: 2000}},
+    %{start_at: 12000, detail: %{type: :fade,   color: white,  duration: 4000}},
+    %{start_at: 16000, detail: %{type: :fade,   color: yellow, duration: 4000}},
+    %{start_at: 20000, detail: %{type: :fade,   color: black,  duration: 1000}},
+    %{start_at: 22000, detail: %{type: :fade,   color: black,  duration: 2000}},
+    %{start_at: 23000, detail: %{type: :rainbow}}
   ]
 
   defstruct maestro: nil
