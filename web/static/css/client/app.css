@@ -35,8 +35,6 @@ html, body, #board {
 .rainbow {
   /* based on http://jsdo.it/js.tktk/knEV */
 
-  color: rgba(255, 255, 255, 0.1);
-
   background: #ed8080; /* Old browsers */
 
   background: -moz-linear-gradient(

@@ -1,0 +1,2 @@
+brunch build
+mix phoenix.digest
