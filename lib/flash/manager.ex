@@ -1,12 +1,24 @@
 defmodule Flash.Manager do
   use GenServer
 
+  yellow = "#f1c40f"
+  blue   = "#22A7F0"
+  pink   = "#D2527F"
+  white  = "#ecf0f1"
+  black  = "#101010"
+
   @scores [
-    %{start_at:    10, detail: %{type: :fade, color: "#144", duration: 1000}},
-    %{start_at:  5000, detail: %{type: :switch, color: "#944"}},
-    %{start_at: 10000, detail: %{type: :fade, color: "#000", duration: 10000}},
-    %{start_at: 20000, detail: %{type: :fade, color: "#fff", duration: 10000}},
-    %{start_at: 30000, detail: %{type: :rainbow}}
+    %{start_at:    10, detail: %{type: :switch, color: white}},
+    %{start_at:  1000, detail: %{type: :switch, color: yellow}},
+    %{start_at:  2000, detail: %{type: :switch, color: white}},
+    %{start_at:  3000, detail: %{type: :switch, color: yellow}},
+    %{start_at:  4000, detail: %{type: :switch, color: white}},
+    %{start_at:  5000, detail: %{type: :switch, color: yellow}},
+    %{start_at:  6000, detail: %{type: :fade,   color: pink,   duration: 2000}},
+    %{start_at:  8000, detail: %{type: :fade,   color: white,  duration: 4000}},
+    %{start_at: 12000, detail: %{type: :fade,   color: yellow, duration: 4000}},
+    %{start_at: 13000, detail: %{type: :fade,   color: black,  duration: 1000}},
+    %{start_at: 14000, detail: %{type: :rainbow}}
   ]
 
   defstruct maestro: nil
