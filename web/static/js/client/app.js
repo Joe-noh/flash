@@ -8,29 +8,36 @@ let channel = socket.channel("rooms:lobby", {operator: false});
 let noSleep = new NoSleep();
 let cyalume = new Cyalume('body');
 
+let applyFlash = (params) => {
+  switch(params.type) {
+  case "fade":
+    cyalume.fades(params.color, params.duration);
+    break;
+  case "switch":
+    cyalume.switches(params.color);
+    break;
+  case "rainbow":
+    cyalume.rainbows();
+    break;
+  default:
+    console.log("unsupported message", params);
+  }
+};
+
 $(document).ready(() => {
   channel.on("current", (params) => {
     console.log(params);
 
-    switch(params.type) {
-    case "fade":
-      cyalume.fades(params.color, params.duration);
-      break;
-    case "switch":
-      cyalume.switches(params.color);
-      break;
-    case "rainbow":
-      cyalume.rainbows();
-      break;
-    default:
-      console.log("unsupported message", params);
-    }
+    applyFlash(params);
 
     channel.push("current:ok", {});
   });
 
   channel.join()
-    .receive("ok",    (resp) => { console.log("Joined successfully"); })
+    .receive("ok", (resp) => {
+      console.log("Joined successfully");
+      console.log(resp);
+    })
     .receive("error", (resp) => { console.log("Unable to join", resp) });
 });
 

@@ -36,7 +36,11 @@ defmodule Flash.Manager do
     GenServer.cast __MODULE__, {:start_live, offset}
   end
 
-  def scores(), do: @scores
+  def scores, do: @scores
+
+  def current do
+    GenServer.call __MODULE__, :current
+  end
 
   def init(_) do
     {:ok, %__MODULE__{}}
@@ -53,5 +57,13 @@ defmodule Flash.Manager do
     {:ok, new_pid} = Flash.Maestro.start_link(@scores, offset)
 
     {:noreply, %{state | maestro: new_pid}}
+  end
+
+  def handle_call(:current, _from, state = %{maestro: nil}) do
+    {:reply, %{}, state}
+  end
+
+  def handle_call(:current, _from, state = %{maestro: pid}) do
+    {:reply, Flash.Maestro.current(pid), state}
   end
 end

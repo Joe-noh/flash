@@ -4,7 +4,7 @@ defmodule Flash.RoomChannel do
   @room "rooms:lobby"
 
   def join(@room, %{"operator" => false}, socket) do
-    {:ok, %{}, socket}
+    {:ok, Flash.Manager.current, socket}
   end
 
   def join(@room, %{"operator" => true}, socket) do
