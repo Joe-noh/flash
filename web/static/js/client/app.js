@@ -47,5 +47,6 @@ function enableNoSleep() {
 
 $('#start-button').click((e) => {
   $(e.target).hide();
+  $("#please-wait").show();
   noSleep.enable();
 });
