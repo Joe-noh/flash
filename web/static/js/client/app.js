@@ -26,6 +26,7 @@ let applyFlash = (params) => {
 
 $(document).ready(() => {
   channel.on("current", (params) => {
+    $("#please-wait").hide();
     console.log(params);
 
     applyFlash(params);
@@ -47,5 +48,6 @@ function enableNoSleep() {
 
 $('#start-button').click((e) => {
   $(e.target).hide();
+  $("#please-wait").show();
   noSleep.enable();
 });

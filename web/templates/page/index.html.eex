@@ -1,5 +1,6 @@
 <div id="board">
   <button id="start-button">START</button>
+  <p id="please-wait">Please Wait...</p>
 </div>
 
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
