@@ -75,6 +75,7 @@ defmodule Flash.Manager do
   end
 
   def handle_cast(:switch_black, state = %{maestro: pid}) do
+    :fired = Flash.Maestro.fire(pid)
     {:ok, new_pid} = Flash.Maestro.start_link(@black_out)
 
     {:noreply, %{state | maestro: new_pid}}
