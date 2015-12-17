@@ -26,6 +26,7 @@ let applyFlash = (params) => {
 
 $(document).ready(() => {
   channel.on("current", (params) => {
+    $("#please-wait").hide();
     console.log(params);
 
     applyFlash(params);
