@@ -8,6 +8,26 @@ html, body, #board {
   position: relative;
 }
 
+#please-wait {
+  color: #eee;
+  font-size: 16pt;
+  text-align: center;
+  line-height: 2;
+
+  width: 16em;
+  height: 2em;
+
+  display: block;
+  position: absolute;
+
+  top: 50%;
+  margin-top: -1em;
+  left: 50%;
+  margin-left: -8em;
+
+  display: none;
+}
+
 #start-button {
   background-color: #27ae60;
   color: #eee;
