@@ -3,6 +3,8 @@
 
   <p>行をクリックするとそこからリスタートするのである。右端のカラーコードはクリックしてはならないのだ。</p>
 
+  <button id="stop-button">STOP</button>
+
   <table id="score-table" border="1">
     <thead>
       <tr align="right">

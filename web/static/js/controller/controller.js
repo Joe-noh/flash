@@ -56,9 +56,14 @@ $(document).ready(() => {
     })
     .receive("error", (resp) => { console.log("Unable to join", resp) });
 
-  $("#scores").on("click", "td", (e) => {
+  $("#scores").on("click tap", "td", (e) => {
     let offset = $(e.target).parent().data("offset");
     console.log(`${offset}からリスタート`);
     channel.push("start", {offset: offset});
+  });
+
+  $("#stop-button").on("click", (e) => {
+    console.log("ストップ！");
+    channel.push("stop", {});
   });
 });

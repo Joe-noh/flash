@@ -17,6 +17,11 @@ defmodule Flash.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("stop", _params, socket) do
+    Flash.Manager.switch_black()
+    {:noreply, socket}
+  end
+
   def handle_in(_, _, socket) do
     {:noreply, socket}
   end
