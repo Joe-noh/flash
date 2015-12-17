@@ -17,6 +17,10 @@ defmodule Flash.Maestro do
     GenServer.call(pid, :current)
   end
 
+  def switch_black(pid) do
+    GenServer.cast(pid, :switch_black)
+  end
+
   def init([scores, offset]) do
     forward_sec = Enum.at(scores, offset).start_at
 
