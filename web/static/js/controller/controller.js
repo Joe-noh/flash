@@ -66,4 +66,10 @@ $(document).ready(() => {
     console.log("ストップ！");
     channel.push("stop", {});
   });
+
+  $("#picker").spectrum({
+    move: (color) => {
+      channel.push("change_color", {color: color.toHexString()});
+    }
+  });
 });

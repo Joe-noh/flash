@@ -30,6 +30,6 @@ defmodule Flash do
   end
 
   def color(code) do
-    Flash.Endpoint.broadcast! "rooms:lobby", "color:change", %{code: code}
+    Flash.Endpoint.broadcast! "rooms:lobby", "change_color", %{code: code}
   end
 end

@@ -19,8 +19,8 @@ class Cyalume {
   }
 
   _cancel() {
-    this.dom.removeClass();
     this.dom.stop();
+    this.dom.removeClass();
   }
 };
 

@@ -1,35 +1,43 @@
 defmodule Flash.Manager do
   use GenServer
 
-  @yellow "#f1c40f"
+  @skyblue "#6fe3fc"
   @blue   "#22A7F0"
-  @pink   "#D2527F"
-  @white  "#ecf0f1"
+  @pink  "#fd92be"
   @black  "#101010"
 
+  expand_score = fn
+    {start_at, :switch, color} ->
+      %{start_at: start_at, detail: %{type: :switch, color: color}}
+    {start_at, :fade, color, duration} ->
+      %{start_at: start_at, detail: %{type: :switch, color: color, duration: duration}}
+    {start_at, :rainbow} ->
+      %{start_at: start_at, detail: %{type: :rainbow}}
+  end
+
   @scores [
-    %{start_at:    10, detail: %{type: :switch, color: @white}},
-    %{start_at:  1000, detail: %{type: :switch, color: @yellow}},
-    %{start_at:  2000, detail: %{type: :switch, color: @white}},
-    %{start_at:  3000, detail: %{type: :switch, color: @yellow}},
-    %{start_at:  4000, detail: %{type: :switch, color: @white}},
-    %{start_at:  5000, detail: %{type: :switch, color: @yellow}},
-    %{start_at:  6000, detail: %{type: :switch, color: @white}},
-    %{start_at:  7000, detail: %{type: :switch, color: @yellow}},
-    %{start_at:  8000, detail: %{type: :switch, color: @white}},
-    %{start_at:  9000, detail: %{type: :switch, color: @yellow}},
-    %{start_at: 10000, detail: %{type: :fade,   color: @pink,   duration: 2000}},
-    %{start_at: 12000, detail: %{type: :fade,   color: @white,  duration: 4000}},
-    %{start_at: 16000, detail: %{type: :fade,   color: @yellow, duration: 4000}},
-    %{start_at: 20000, detail: %{type: :fade,   color: @black,  duration: 1000}},
-    %{start_at: 22000, detail: %{type: :fade,   color: @black,  duration: 2000}},
-    %{start_at: 23000, detail: %{type: :rainbow}}
-  ]
+    {   10, :switch, @pink},
+    { 1000, :switch, @skyblue},
+    { 2000, :switch, @pink},
+    { 3000, :switch, @skyblue},
+    { 4000, :switch, @pink},
+    { 5000, :switch, @skyblue},
+    { 6000, :switch, @pink},
+    { 7000, :switch, @skyblue},
+    { 8000, :switch, @pink},
+    { 9000, :switch, @skyblue},
+    {10000, :fade,   @pink,  2000},
+    {12000, :fade,   @pink, 4000},
+    {16000, :fade,   @skyblue, 4000},
+    {20000, :fade,   @black, 1000},
+    {22000, :fade,   @black, 2000},
+    {23000, :rainbow}
+  ] |> Enum.map(expand_score)
 
   @black_out [
-    %{start_at:   10, detail: %{type: :switch, color: @black}},
-    %{start_at: 1000, detail: %{type: :switch, color: @black}}
-  ]
+    {10, :switch,@black},
+    {1000, :switch,@black}
+  ] |> Enum.map(expand_score)
 
   defstruct maestro: nil
 
@@ -51,8 +59,21 @@ defmodule Flash.Manager do
     GenServer.cast __MODULE__, :switch_black
   end
 
+  def change_color(color) do
+    GenServer.cast __MODULE__, {:change_color, color}
+  end
+
   def init(_) do
-    {:ok, %__MODULE__{}}
+    {:ok, pid} = Flash.Maestro.start_link([
+      %{start_at: 0, detail: %{type: :switch, color: @black}}
+    ])
+
+    {:ok, %__MODULE__{maestro: pid}}
+  end
+
+  def handle_cast({:change_color, color}, state = %{maestro: pid}) do
+    Flash.Maestro.change_color(pid, color)
+    {:noreply, state}
   end
 
   def handle_cast({:start_live, offset}, state = %{maestro: nil}) do

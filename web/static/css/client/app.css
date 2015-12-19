@@ -3,20 +3,8 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #101010;
 
   position: relative;
-
-  z-index: 1;
-}
-
-#board {
-  width: 100%;
-  height: 100%;
-
-  position: relative;
-
-  z-index: 999;
 }
 
 #please-wait {
@@ -55,13 +43,6 @@ html, body {
   margin-top: -1.5em;
   left: 50%;
   margin-left: -4em;
-}
-
-#log {
-  position: absolute;
-  z-index: 10000;
-  top: 0;
-  left: 0;
 }
 
 .rainbow {

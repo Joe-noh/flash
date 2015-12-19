@@ -17,6 +17,10 @@ defmodule Flash.Maestro do
     GenServer.call(pid, :current)
   end
 
+  def change_color(pid, color) do
+    GenServer.cast(pid, {:change_color, color})
+  end
+
   def switch_black(pid) do
     GenServer.cast(pid, :switch_black)
   end
@@ -39,6 +43,11 @@ defmodule Flash.Maestro do
 
   def handle_call(:current, _from, state = %__MODULE__{current: current}) do
     {:reply, current, state}
+  end
+
+  def handle_cast({:change_color, color}, state) do
+    Flash.Endpoint.broadcast!(@room, "current", %{type: :switch, color: color})
+    {:noreply, state}
   end
 
   def handle_info({:score, detail}, state) do

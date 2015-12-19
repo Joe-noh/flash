@@ -17,6 +17,12 @@ defmodule Flash.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("change_color", params, socket) do
+    params |> Map.get("color") |> Flash.Manager.change_color
+
+    {:noreply, socket}
+  end
+
   def handle_in("stop", _params, socket) do
     Flash.Manager.switch_black()
     {:noreply, socket}
