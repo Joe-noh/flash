@@ -25,6 +25,8 @@ let applyFlash = (params) => {
 };
 
 $(document).ready(() => {
+  cyalume.switches('#101010');
+
   channel.on("current", (params) => {
     $("#please-wait").hide();
     console.log(params);
