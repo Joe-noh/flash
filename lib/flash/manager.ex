@@ -3,10 +3,31 @@ defmodule Flash.Manager do
 
   import Flash.Helpers
 
-  @skyblue "#6fe3fc"
-  @blue    "#22a7f0"
-  @pink    "#fd92be"
+  # きゃりー用
+  @skyblue "#99ffff"
+  @yellow  "#fcea90"
+  @pink    "#ff99c7"
+
+  # マライア用
+  @red   "#ff0404"
+  @green "#348f23"
+
+  @white   "#ffffff"
   @black   "#101010"
+
+  def scores do
+    [
+      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 0),
+      fade_cycle(  31, [@pink, @yellow, @skyblue], bpm_to_period(145), offset(145, 31)),
+    ] |> List.flatten |> Enum.map(&expand_score/1)
+  end
+
+  def black_out_scores do
+    [
+      {  10, :switch, @black},
+      {1000, :switch, @black}
+    ] |> Enum.map(&expand_score/1)
+  end
 
   defstruct maestro: nil
 
@@ -65,19 +86,5 @@ defmodule Flash.Manager do
 
   def handle_call(:current, _from, state = %{maestro: pid}) do
     {:reply, Flash.Maestro.current(pid), state}
-  end
-
-  def scores do
-    [
-      switch_cycle(20, [@pink, @skyblue, @blue], bpm_to_period(170), 0),
-      fade_cycle(  30, [@pink, @skyblue, @blue], bpm_to_period(145), offset(170, 20))
-    ] |> List.flatten |> Enum.map(&expand_score/1)
-  end
-
-  def black_out_scores do
-    [
-      {  10, :switch, @black},
-      {1000, :switch, @black}
-    ] |> Enum.map(&expand_score/1)
   end
 end
