@@ -8,13 +8,6 @@ defmodule Flash.Manager do
   @pink    "#fd92be"
   @black   "#101010"
 
-  def black_out do
-    [
-      {  10, :switch, @black},
-      {1000, :switch, @black}
-    ] |> Enum.map(&expand_score/1)
-  end
-
   defstruct maestro: nil
 
   def start_link do
@@ -23,13 +16,6 @@ defmodule Flash.Manager do
 
   def start_live(offset) do
     GenServer.cast __MODULE__, {:start_live, offset}
-  end
-
-  def scores do
-    [
-      switch_cycle(20, [@pink, @skyblue, @blue], 350, 0),
-      fade_cycle(  30, [@pink, @skyblue, @blue], 474, 350*20)
-    ] |> List.flatten |> Enum.map(&expand_score/1)
   end
 
   def current do
@@ -45,9 +31,9 @@ defmodule Flash.Manager do
   end
 
   def init(_) do
-    {:ok, pid} = Flash.Maestro.start_link([
+    {:ok, pid} = Flash.Maestro.start_link [
       %{start_at: 0, detail: %{type: :switch, color: @black}}
-    ])
+    ]
 
     {:ok, %__MODULE__{maestro: pid}}
   end
@@ -72,12 +58,26 @@ defmodule Flash.Manager do
 
   def handle_cast(:switch_black, state = %{maestro: pid}) do
     :fired = Flash.Maestro.fire(pid)
-    {:ok, new_pid} = Flash.Maestro.start_link(black_out)
+    {:ok, new_pid} = Flash.Maestro.start_link(black_out_scores)
 
     {:noreply, %{state | maestro: new_pid}}
   end
 
   def handle_call(:current, _from, state = %{maestro: pid}) do
     {:reply, Flash.Maestro.current(pid), state}
+  end
+
+  def scores do
+    [
+      switch_cycle(20, [@pink, @skyblue, @blue], bpm_to_period(170), 0),
+      fade_cycle(  30, [@pink, @skyblue, @blue], bpm_to_period(145), offset(170, 20))
+    ] |> List.flatten |> Enum.map(&expand_score/1)
+  end
+
+  def black_out_scores do
+    [
+      {  10, :switch, @black},
+      {1000, :switch, @black}
+    ] |> Enum.map(&expand_score/1)
   end
 end

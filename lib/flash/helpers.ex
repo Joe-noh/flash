@@ -33,7 +33,7 @@ defmodule Flash.Helpers do
     %{start_at: start_at, detail: %{type: :rainbow}}
   end
 
-  def bpm(n), do: n * 1000 / 60
+  def bpm_to_period(bpm), do: round(60000 / bpm)
 
-  def offset(bpm, count), do: count * 60000 / bpm
+  def offset(bpm, count), do: count * bpm_to_period(bpm)
 end
