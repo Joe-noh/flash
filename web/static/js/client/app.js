@@ -16,6 +16,9 @@ let applyFlash = (params) => {
   case "switch":
     cyalume.switches(params.color);
     break;
+  case "switch_random":
+    cyalume.switchesRandomly(params.colors);
+    break;
   case "rainbow":
     cyalume.rainbows();
     break;

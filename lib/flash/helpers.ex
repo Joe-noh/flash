@@ -21,12 +21,22 @@ defmodule Flash.Helpers do
     end
   end
 
+  def switch_random_cycle(count, colors, period, start_at) do
+    Enum.map 0..count-1, fn i ->
+      {start_at + period*i, :switch_random, colors}
+    end
+  end
+
   def expand_score({start_at, :switch, color}) do
     %{start_at: start_at, detail: %{type: :switch, color: color}}
   end
 
   def expand_score({start_at, :fade, color, duration}) do
     %{start_at: start_at, detail: %{type: :fade, color: color, duration: duration}}
+  end
+
+  def expand_score({start_at, :switch_random, colors}) do
+    %{start_at: start_at, detail: %{type: :switch_random, colors: colors}}
   end
 
   def expand_score({start_at, :rainbow}) do
