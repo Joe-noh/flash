@@ -6,7 +6,7 @@ import Cyalume from "./cyalume";
 let channel = socket.channel("rooms:lobby", {operator: false});
 
 let noSleep = new NoSleep();
-let cyalume = new Cyalume("body");
+let cyalume = new Cyalume("#screen");
 let shade   = new Cyalume("#shade");
 
 let applyFlash = (params) => {

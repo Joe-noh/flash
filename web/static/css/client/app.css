@@ -8,6 +8,17 @@ html, body {
   z-index: 1;
 }
 
+#screen {
+  width:  100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 5;
+}
+
 #shade {
   width:  100%;
   height: 100%;
@@ -60,88 +71,54 @@ html, body {
 }
 
 .rainbow {
-  /* based on http://jsdo.it/js.tktk/knEV */
-
   background: #ed8080; /* Old browsers */
-
-  background: -moz-linear-gradient(
-    bottom, #ed8080 0%, #2a77d6 16%, #5eb524 32%, #eacd25 48%, #ed8080 64%, #2a77d6 80%, #5eb524 100%
-  ); /* FF3.6+ */
-
-  background: -webkit-gradient(
-    linear, left top, left bottom,
-    color-stop(0%,  #ed8080), color-stop(16%, #2a77d6), color-stop(32%,  #5eb524), color-stop(48%, #eacd25),
-    color-stop(64%, #ed8080), color-stop(80%, #2a77d6), color-stop(100%, #5eb524)
-  ); /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(
-    bottom, #ed8080 0%,#2a77d6 16%,#5eb524 32%,#eacd25 48%,#ed8080 64%,#2a77d6 80%,#5eb524 100%
-  ); /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(
-    bottom, #ed8080 0%, #2a77d6 16%, #5eb524 32%, #eacd25 48%, #ed8080 64%, #2a77d6 80%, #5eb524 100%
-  ); /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(
-    bottom, #ed8080 0%, #2a77d6 16%, #5eb524 32%, #eacd25 48%, #ed8080 64%, #2a77d6 80%, #5eb524 100%
-  ); /* IE10+ */
-
-  background: linear-gradient(
-    to bottom, #ed8080 0%, #2a77d6 16%, #5eb524 32%, #eacd25 48%, #ed8080 64%, #2a77d6 80%, #5eb524 100%
-  ); /* W3C */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(
-    startColorstr='#ed8080', endColorstr='#5eb524', GradientType=1
-  ); /* IE6-9 */
+  background: -moz-linear-gradient(left,  #ed8080 0%, #2a77d6 16%, #5eb524 32%, #eacd25 48%, #ed8080 64%, #2a77d6 80%, #5eb524 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ed8080), color-stop(16%,#2a77d6), color-stop(32%,#5eb524), color-stop(48%,#eacd25), color-stop(64%,#ed8080), color-stop(80%,#2a77d6), color-stop(100%,#5eb524)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  #ed8080 0%,#2a77d6 16%,#5eb524 32%,#eacd25 48%,#ed8080 64%,#2a77d6 80%,#5eb524 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  #ed8080 0%,#2a77d6 16%,#5eb524 32%,#eacd25 48%,#ed8080 64%,#2a77d6 80%,#5eb524 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  #ed8080 0%,#2a77d6 16%,#5eb524 32%,#eacd25 48%,#ed8080 64%,#2a77d6 80%,#5eb524 100%); /* IE10+ */
+  background: linear-gradient(to right,  #ed8080 0%,#2a77d6 16%,#5eb524 32%,#eacd25 48%,#ed8080 64%,#2a77d6 80%,#5eb524 100%); /* W3C */
 
   -webkit-background-size: 300% 300%;
   -moz-background-size: 300% 300%;
   background-size: 300% 300%;
 
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-
-  animation: rainbow infinite 3s linear;
-  -o-animation: rainbow infinite 3s linear;
-  -moz-animation: rainbow infinite 3s linear;
-  -webkit-animation: rainbow infinite 3s linear;
+  animation:rainbow infinite 3s linear;
+  -o-animation:rainbow infinite 3s linear;
+  -moz-animation:rainbow infinite 3s linear;
+  -webkit-animation:rainbow infinite 3s linear;
 
   background-repeat: no-repeat;
-  background-position: bottom right;
+  background-position: top left;
   background-color: #222;
 }
-
-@-moz-keyframes  rainbow {
+@-moz-keyframes rainbow {
   0% {
-    background-position: bottom right;
+    background-position: top left;
   }
   100% {
     background-position: top right;
   }
 }
-
-@-webkit-keyframes  rainbow {
+@-webkit-keyframes rainbow {
   0% {
-    background-position: bottom right;
+    background-position: top left;
   }
   100% {
     background-position: top right;
   }
 }
-
-@-o-keyframes  rainbow {
+@-o-keyframes rainbow {
   0% {
-    background-position: bottom right;
+    background-position: top left;
   }
   100% {
     background-position: top right;
   }
 }
-
-@keyframes  rainbow {
+@keyframes rainbow {
   0% {
-    background-position: bottom right;
+    background-position: top left;
   }
   100% {
     background-position: top right;

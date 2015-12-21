@@ -1,3 +1,4 @@
+<div id="screen" class="rainbow"></div>
 <button id="start-button">START</button>
 <p id="please-wait">Please Wait...</p>
 <div id="shade"></div>
