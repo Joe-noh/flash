@@ -30,6 +30,15 @@ class Cyalume {
     this.dom.addClass('rainbow');
   }
 
+  transparent() {
+    this.dom.css('opacity', 0);
+  }
+
+  shades(duration) {
+    this._cancel();
+    this.dom.animate({opacity: 1}, duration);
+  }
+
   _cancel() {
     this.dom.stop();
     this.dom.removeClass();

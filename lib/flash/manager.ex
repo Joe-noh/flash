@@ -18,12 +18,13 @@ defmodule Flash.Manager do
   def scores do
     [
       switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 0),
-      fade_cycle(  31, [@pink, @yellow, @skyblue], bpm_to_period(145), offset(145, 31)),
+      fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
       # disney rockのがここに来る
 
-      switch_random_cycle(31, [@red, @green, @white], bpm_to_period(75), offset(145, 31)*2 + offset(170, 122)),
-      {115000, :rainbow}
+      switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), offset(145, 31)*2 + offset(170, 124)),
+      {110000, :rainbow},
+      {123000, :shade, 27000}
     ] |> List.flatten |> Enum.map(&expand_score/1)
   end
 

@@ -7,6 +7,7 @@ let channel = socket.channel("rooms:lobby", {operator: false});
 
 let noSleep = new NoSleep();
 let cyalume = new Cyalume("body");
+let shade   = new Cyalume("#shade");
 
 let applyFlash = (params) => {
   switch(params.type) {
@@ -22,6 +23,9 @@ let applyFlash = (params) => {
   case "rainbow":
     cyalume.rainbows();
     break;
+  case "shade":
+    shade.shades(params.duration);
+    break;
   default:
     console.log("unsupported message", params);
   }
@@ -29,6 +33,8 @@ let applyFlash = (params) => {
 
 $(document).ready(() => {
   cyalume.switches('#101010');
+  shade.switches('#101010');
+  shade.transparent();
 
   channel.on("current", (params) => {
     $("#please-wait").hide();

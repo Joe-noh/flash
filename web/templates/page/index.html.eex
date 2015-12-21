@@ -1,4 +1,5 @@
 <button id="start-button">START</button>
 <p id="please-wait">Please Wait...</p>
+<div id="shade"></div>
 
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
