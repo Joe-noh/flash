@@ -96,6 +96,9 @@ html, body {
   0% {
     background-position: top left;
   }
+  50% {
+    background-position: top center;
+  }
   100% {
     background-position: top right;
   }
@@ -103,6 +106,9 @@ html, body {
 @-webkit-keyframes rainbow {
   0% {
     background-position: top left;
+  }
+  50% {
+    background-position: top center;
   }
   100% {
     background-position: top right;
@@ -112,6 +118,9 @@ html, body {
   0% {
     background-position: top left;
   }
+  50% {
+    background-position: top center;
+  }
   100% {
     background-position: top right;
   }
@@ -119,6 +128,9 @@ html, body {
 @keyframes rainbow {
   0% {
     background-position: top left;
+  }
+  50% {
+    background-position: top center;
   }
   100% {
     background-position: top right;
