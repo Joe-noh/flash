@@ -23,6 +23,7 @@ let applyFlash = (params) => {
     break;
   case "switch_random":
     cyalume.switchesRandomly(params.colors);
+    circle.getAway();
     break;
   case "rainbow":
     cyalume.rainbows();
@@ -35,6 +36,7 @@ let applyFlash = (params) => {
     break;
   case "circle":
     circle.spawn(params.color, params.duration);
+    slider.getAway();
     break;
   default:
     console.log("unsupported message", params);

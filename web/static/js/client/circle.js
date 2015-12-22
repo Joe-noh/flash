@@ -34,6 +34,10 @@ class Circle {
   _random(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
+
+  getAway() {
+    this.circleDom.hide();
+  }
 }
 
 export default Circle;
