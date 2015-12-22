@@ -8,12 +8,19 @@ defmodule Flash.Manager do
   @yellow  "#fcea90"
   @pink    "#ff99c7"
 
-  # pia-no-jac用
-  @p_brown  "#572900"
-  @p_orange "#f78e1e"
-  @p_yellow "#ffdd00"
-  @p_green  "#00b5ad"
-  @p_red    "#ff3e42"
+  # pia-no-jac slide用
+  @s_blue   "#00aedb"
+  @s_purple "#a200ff"
+  @s_orange "#f47835"
+  @s_red    "#d41243"
+  @s_green  "#8ec127"
+
+  # pia-no-jac circle用
+  @c_red    "#d11141"
+  @c_green  "#00b159"
+  @c_blue   "#00aedb"
+  @c_orange "#f37735"
+  @c_yellow "#ffc425"
 
   # マライア用
   @red   "#d20b0b"
