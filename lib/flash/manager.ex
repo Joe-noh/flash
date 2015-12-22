@@ -17,8 +17,8 @@ defmodule Flash.Manager do
 
   # pia-no-jac circle用
   @c_red    "#d11141"
-  @c_green  "#00b159"
-  @c_blue   "#00aedb"
+  @c_green  "#00aa49"
+  @c_blue   "#11b3ff"
   @c_orange "#f37735"
   @c_yellow "#ffc425"
 
