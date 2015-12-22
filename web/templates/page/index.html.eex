@@ -4,7 +4,11 @@
 <div class="slide slide1"></div>
 <div class="slide slide2"></div>
 <button id="start-button">START</button>
-<p id="please-wait">Please Wait...</p>
+<p id="please-wait">
+Maximize your screen brightness<br />
+and<br/>
+Please Wait.
+</p>
 <div id="shade"></div>
 
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

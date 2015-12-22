@@ -60,18 +60,18 @@ html, body {
   color: #eee;
   font-size: 16pt;
   text-align: center;
-  line-height: 2;
+  line-height: 1.5;
 
-  width: 16em;
-  height: 2em;
+  width: 18em;
+  height: 6em;
 
   display: block;
   position: absolute;
 
   top: 50%;
-  margin-top: -1em;
+  margin-top: -2.3em;
   left: 50%;
-  margin-left: -8em;
+  margin-left: -9em;
 
   display: none;
   z-index: 100;
