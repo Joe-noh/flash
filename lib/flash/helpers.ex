@@ -27,6 +27,14 @@ defmodule Flash.Helpers do
     end
   end
 
+  def slide_cycle(count, colors, period, duration, start_at) do
+    length = length(colors)
+    Enum.map 0..count-1, fn i ->
+      color = Enum.at(colors, rem(i, length))
+      {start_at + period*i, :slide, color, duration}
+    end
+  end
+
   def expand_score({start_at, :switch, color}) do
     %{start_at: start_at, detail: %{type: :switch, color: color}}
   end

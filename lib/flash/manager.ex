@@ -16,31 +16,18 @@ defmodule Flash.Manager do
   @p_red    "#ff3e42"
 
   # マライア用
-  @red   "#ff0404"
-  @green "#348f23"
+  @red   "#ee0404"
+  @green "#148f13"
 
   @white "#ffffff"
   @black "#101010"
 
   def scores do
     [
-      {   0, :slide, @p_orange, 300},
-      {1000, :slide, @p_brown, 300},
-      {2000, :slide, @p_yellow, 300},
-      {3000, :slide, @p_green, 300},
-      {4000, :slide, @p_red, 300},
-      {5000, :slide, @p_brown, 300},
-      {6000, :slide, @p_yellow, 300},
-      {7000, :slide, @p_green, 300},
-      {8000, :slide, @p_red, 300},
-      {9000, :slide, @p_brown, 300},
-      {10000, :slide, @p_yellow, 300},
-      {11000, :slide, @p_green, 300},
-      {12000, :slide, @p_red, 300},
-      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 30000),
+      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 10),
       fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
-      # disney rockのがここに来る
+      slide_cycle(31, [@p_orange, @p_yellow, @p_green, @p_red], bpm_to_period(85), bpm_to_period(170), 25500),
 
       switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), offset(145, 31)*2 + offset(170, 124)),
       {110000, :rainbow},

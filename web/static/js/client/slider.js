@@ -25,8 +25,8 @@ class Slider {
       case 2:
         this.state = 3;
         this.domH.css('z-index', 7);
-        this.domH.css('background-color', color);
         this.domH.css('width', '100%');
+        this.domH.css('background-color', color);
         this.domV.velocity({height: '0%'}, duration, "ease-out");
         break;
       case 3:
