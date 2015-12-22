@@ -4,7 +4,7 @@ exports.config = {
     javascripts: {
       joinTo: {
         "js/controller.js": /^(web\/static\/js\/(shared|controller))|(deps)/,
-        "js/app.js":        /^(web\/static\/js\/(shared|client))|(deps)|(web\/static\/vendor)/
+        "js/app.js":        /^(web\/static\/js\/(shared|client))|(deps)|(web\/static\/vendor\/js)/
       }
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
@@ -25,7 +25,7 @@ exports.config = {
     stylesheets: {
       joinTo: {
         "css/controller.css": /^(web\/static\/css\/controller)/,
-        "css/app.css": /^(web\/static\/css\/client)/
+        "css/app.css": /^(web\/static\/css\/client)|(web\/static\/vendor\/css)/
       }
     },
     templates: {
