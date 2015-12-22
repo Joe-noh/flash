@@ -1,4 +1,6 @@
-<div id="screen"></div>
+<div id="screen">
+  <div id="circle"></div>
+</div>
 <div class="slide slide1"></div>
 <div class="slide slide2"></div>
 <button id="start-button">START</button>

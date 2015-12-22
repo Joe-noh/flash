@@ -35,28 +35,32 @@ defmodule Flash.Helpers do
     end
   end
 
+  def circle_cycle(count, colors, period, duration, start_at) do
+    length = length(colors)
+    Enum.map 0..count-1, fn i ->
+      color = Enum.at(colors, rem(i, length))
+      {start_at + period*i, :circle, color, duration}
+    end
+  end
+
   def expand_score({start_at, :switch, color}) do
     %{start_at: start_at, detail: %{type: :switch, color: color}}
-  end
-
-  def expand_score({start_at, :fade, color, duration}) do
-    %{start_at: start_at, detail: %{type: :fade, color: color, duration: duration}}
-  end
-
-  def expand_score({start_at, :switch_random, colors}) do
-    %{start_at: start_at, detail: %{type: :switch_random, colors: colors}}
   end
 
   def expand_score({start_at, :rainbow}) do
     %{start_at: start_at, detail: %{type: :rainbow}}
   end
 
-  def expand_score({start_at, :shade, duration}) do
-    %{start_at: start_at, detail: %{type: :shade, duration: duration}}
+  def expand_score({start_at, type, duration}) when is_number(duration) do
+    %{start_at: start_at, detail: %{type: type, duration: duration}}
   end
 
-  def expand_score({start_at, :slide, color, duration}) do
-    %{start_at: start_at, detail: %{type: :slide, color: color, duration: duration}}
+  def expand_score({start_at, type, colors}) do
+    %{start_at: start_at, detail: %{type: type, colors: colors}}
+  end
+
+  def expand_score({start_at, type, color, duration}) do
+    %{start_at: start_at, detail: %{type: type, color: color, duration: duration}}
   end
 
   def bpm_to_period(bpm), do: round(60000 / bpm)

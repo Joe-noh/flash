@@ -24,7 +24,9 @@ defmodule Flash.Manager do
 
   def scores do
     [
-      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 10),
+      circle_cycle(31, [@p_orange, @p_yellow, @p_green, @p_red], bpm_to_period(85), bpm_to_period(100), 0),
+
+      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 10000),
       fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
       slide_cycle(31, [@p_orange, @p_yellow, @p_green, @p_red], bpm_to_period(85), bpm_to_period(170), 25500),
