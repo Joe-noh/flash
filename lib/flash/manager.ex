@@ -16,8 +16,8 @@ defmodule Flash.Manager do
   @p_red    "#ff3e42"
 
   # マライア用
-  @red   "#ee0404"
-  @green "#148f13"
+  @red   "#d20b0b"
+  @green "#215a22"
 
   @white "#ffffff"
   @black "#101010"
