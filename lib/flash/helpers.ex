@@ -47,6 +47,10 @@ defmodule Flash.Helpers do
     %{start_at: start_at, detail: %{type: :shade, duration: duration}}
   end
 
+  def expand_score({start_at, :slide, color, duration}) do
+    %{start_at: start_at, detail: %{type: :slide, color: color, duration: duration}}
+  end
+
   def bpm_to_period(bpm), do: round(60000 / bpm)
 
   def offset(bpm, count), do: count * bpm_to_period(bpm)

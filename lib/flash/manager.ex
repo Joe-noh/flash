@@ -24,7 +24,20 @@ defmodule Flash.Manager do
 
   def scores do
     [
-      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 0),
+      {   0, :slide, @p_orange, 300},
+      {1000, :slide, @p_brown, 300},
+      {2000, :slide, @p_yellow, 300},
+      {3000, :slide, @p_green, 300},
+      {4000, :slide, @p_red, 300},
+      {5000, :slide, @p_brown, 300},
+      {6000, :slide, @p_yellow, 300},
+      {7000, :slide, @p_green, 300},
+      {8000, :slide, @p_red, 300},
+      {9000, :slide, @p_brown, 300},
+      {10000, :slide, @p_yellow, 300},
+      {11000, :slide, @p_green, 300},
+      {12000, :slide, @p_red, 300},
+      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 30000),
       fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
       # disney rockのがここに来る

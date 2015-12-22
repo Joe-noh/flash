@@ -2,12 +2,14 @@ import "deps/phoenix_html/web/static/js/phoenix_html";
 
 import socket from "../shared/socket";
 import Cyalume from "./cyalume";
+import Slider from "./slider";
 
 let channel = socket.channel("rooms:lobby", {operator: false});
 
 let noSleep = new NoSleep();
 let cyalume = new Cyalume("#screen");
 let shade   = new Cyalume("#shade");
+let slider  = new Slider(".slide1", ".slide2");
 
 let applyFlash = (params) => {
   switch(params.type) {
@@ -25,6 +27,9 @@ let applyFlash = (params) => {
     break;
   case "shade":
     shade.shades(params.duration);
+    break;
+  case "slide":
+    slider.slide(params.color, params.duration);
     break;
   default:
     console.log("unsupported message", params);

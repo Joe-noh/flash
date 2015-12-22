@@ -1,4 +1,6 @@
-<div id="screen" class="rainbow"></div>
+<div id="screen"></div>
+<div class="slide slide1"></div>
+<div class="slide slide2"></div>
 <button id="start-button">START</button>
 <p id="please-wait">Please Wait...</p>
 <div id="shade"></div>
