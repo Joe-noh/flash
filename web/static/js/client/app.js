@@ -50,7 +50,6 @@ $(document).ready(() => {
 
   channel.on("current", (params) => {
     $("#please-wait").hide();
-    console.log(params);
 
     applyFlash(params);
 
@@ -59,10 +58,16 @@ $(document).ready(() => {
 
   channel.join()
     .receive("ok", (resp) => {
-      console.log("Joined successfully");
-      console.log(resp);
+      if (window.env == 'dev') {
+        console.log("Joined successfully");
+        console.log(resp);
+      }
     })
-    .receive("error", (resp) => { console.log("Unable to join", resp) });
+    .receive("error", (resp) => {
+      if (window.env == 'dev') {
+        console.log("Unable to join", resp);
+      }
+    });
 });
 
 function enableNoSleep() {
