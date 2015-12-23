@@ -14,15 +14,16 @@ class Cyalume {
     this.dom.animate({backgroundColor: colorCode}, duration);
   }
 
-  switches(colorCode) {
+  switches(colorCode, duration) {
+    let d = (duration == undefined) ? 0 : duration
     this._cancel();
     this.currentColor = colorCode;
-    this.dom.css('backgroundColor', colorCode);
+    this.dom.velocity({backgroundColor: colorCode}, d);
   }
 
   switchesRandomly(colors) {
     let color = this._randomPickup(colors);
-    this.switches(color);
+    this.switches(color, 200);
   }
 
   rainbows() {
