@@ -56,6 +56,20 @@ html, body {
   z-index: 10;
 }
 
+#snow {
+  width:  100%;
+  height: 100%;
+
+  background-image: url('/images/snow1.png'), url('/images/snow2.png'), url('/images/snow3.png');
+  background-size: 33%;
+  background-repeat: repeat;
+  position: relative;
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+}
+
 #please-wait {
   color: #eee;
   font-size: 16pt;
@@ -74,7 +88,7 @@ html, body {
   margin-left: -9em;
 
   display: none;
-  z-index: 100;
+  z-index: 1000;
 }
 
 #start-button {
@@ -87,7 +101,7 @@ html, body {
   height: 3em;
 
   display: block;
-  z-index: 1000;
+  z-index: 2000;
   position: absolute;
 
   top: 50%;
