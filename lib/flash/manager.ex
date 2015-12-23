@@ -23,8 +23,9 @@ defmodule Flash.Manager do
   @c_yellow "#ffc425"
 
   # マライア用
-  @red   "#d20b0b"
+  @red   "#d01212"
   @green "#215a22"
+  @gold  "#d5d404"
 
   @white "#ffffff"
   @black "#101010"
@@ -37,7 +38,7 @@ defmodule Flash.Manager do
       slide_cycle(30, [@s_blue, @s_purple, @s_orange, @s_red, @s_green],  bpm_to_period(85), bpm_to_period(170), 25500),
       circle_cycle(32, [@c_red, @c_green, @c_blue, @c_orange, @c_yellow], bpm_to_period(85), bpm_to_period(110), 25500 + offset(85, 30)),
 
-      switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), 25500 + offset(85, 62)),
+      switch_random_cycle(50, [@red, @green, @gold], bpm_to_period(75), 25500 + offset(85, 62)),
       {110000, :rainbow},
       {120000, :shade, 24000}
     ] |> List.flatten |> Enum.map(&expand_score/1)

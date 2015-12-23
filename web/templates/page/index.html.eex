@@ -5,9 +5,8 @@
 <div class="slide slide2"></div>
 <button id="start-button">START</button>
 <p id="please-wait">
-Maximize your screen brightness<br />
-and<br/>
-Please Wait.
+画面を明るくして<br />
+お待ち下さい
 </p>
 <div id="shade"></div>
 <div id="snow"></div>
