@@ -26,13 +26,17 @@ class Circle {
       height: larger,
       top:    initTop - larger/2,
       left:   initLeft - larger/2
-    }, duration, () => {
+    }, duration, "ease-out", () => {
       this.backDom.css('backgroundColor', color);
     });
   }
 
   _random(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  getAway() {
+    this.circleDom.hide();
   }
 }
 

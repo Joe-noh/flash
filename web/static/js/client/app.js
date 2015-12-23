@@ -4,6 +4,7 @@ import socket from "../shared/socket";
 import Cyalume from "./cyalume";
 import Slider from "./slider";
 import Circle from "./circle";
+import MerryChristmas from "./merry_christmas";
 
 let channel = socket.channel("rooms:lobby", {operator: false});
 
@@ -23,6 +24,7 @@ let applyFlash = (params) => {
     break;
   case "switch_random":
     cyalume.switchesRandomly(params.colors);
+    circle.getAway();
     break;
   case "rainbow":
     cyalume.rainbows();
@@ -35,6 +37,7 @@ let applyFlash = (params) => {
     break;
   case "circle":
     circle.spawn(params.color, params.duration);
+    slider.getAway();
     break;
   default:
     console.log("unsupported message", params);
@@ -42,13 +45,14 @@ let applyFlash = (params) => {
 };
 
 $(document).ready(() => {
+  new MerryChristmas().print_message();
+
   cyalume.switches('#101010');
   shade.switches('#101010');
   shade.transparent();
 
   channel.on("current", (params) => {
     $("#please-wait").hide();
-    console.log(params);
 
     applyFlash(params);
 
@@ -57,10 +61,16 @@ $(document).ready(() => {
 
   channel.join()
     .receive("ok", (resp) => {
-      console.log("Joined successfully");
-      console.log(resp);
+      if (window.env == 'dev') {
+        console.log("Joined successfully");
+        console.log(resp);
+      }
     })
-    .receive("error", (resp) => { console.log("Unable to join", resp) });
+    .receive("error", (resp) => {
+      if (window.env == 'dev') {
+        console.log("Unable to join", resp);
+      }
+    });
 });
 
 function enableNoSleep() {

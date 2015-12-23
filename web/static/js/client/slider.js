@@ -37,6 +37,11 @@ class Slider {
         break;
     }
   }
+
+  getAway() {
+    this.domH.hide();
+    this.domV.hide();
+  }
 }
 
 export default Slider;

@@ -49,7 +49,6 @@ class Cyalume {
     let cs = colors.filter((elem) => {
       return (elem != this.currentColor);
     }, this);
-    console.log(cs);
     let index = Math.floor(Math.random() * cs.length);
 
     return cs[index];

@@ -8,32 +8,38 @@ defmodule Flash.Manager do
   @yellow  "#fcea90"
   @pink    "#ff99c7"
 
-  # pia-no-jac用
-  @p_brown  "#572900"
-  @p_orange "#f78e1e"
-  @p_yellow "#ffdd00"
-  @p_green  "#00b5ad"
-  @p_red    "#ff3e42"
+  # pia-no-jac slide用
+  @s_blue   "#00aedb"
+  @s_purple "#a200ff"
+  @s_orange "#f47835"
+  @s_red    "#d41243"
+  @s_green  "#8ec127"
+
+  # pia-no-jac circle用
+  @c_red    "#d11141"
+  @c_green  "#00aa49"
+  @c_blue   "#11b3ff"
+  @c_orange "#f37735"
+  @c_yellow "#ffc425"
 
   # マライア用
-  @red   "#ee0404"
-  @green "#148f13"
+  @red   "#d20b0b"
+  @green "#215a22"
 
   @white "#ffffff"
   @black "#101010"
 
   def scores do
     [
-      circle_cycle(31, [@p_orange, @p_yellow, @p_green, @p_red], bpm_to_period(85), bpm_to_period(100), 0),
-
-      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 10000),
+      switch_cycle(31, [@pink, @yellow, @skyblue], bpm_to_period(145), 10),
       fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
-      slide_cycle(31, [@p_orange, @p_yellow, @p_green, @p_red], bpm_to_period(85), bpm_to_period(170), 25500),
+      slide_cycle(30, [@s_blue, @s_purple, @s_orange, @s_red, @s_green],  bpm_to_period(85), bpm_to_period(170), 25500),
+      circle_cycle(32, [@c_red, @c_green, @c_blue, @c_orange, @c_yellow], bpm_to_period(85), bpm_to_period(100), 25500 + offset(85, 30)),
 
-      switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), offset(145, 31)*2 + offset(170, 124)),
+      switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), 25500 + offset(85, 62)),
       {110000, :rainbow},
-      {123000, :shade, 27000}
+      {120000, :shade, 24000}
     ] |> List.flatten |> Enum.map(&expand_score/1)
   end
 
