@@ -35,7 +35,7 @@ defmodule Flash.Manager do
       fade_cycle(  31, [@yellow, @skyblue, @pink], bpm_to_period(145), offset(145, 31)),
 
       slide_cycle(30, [@s_blue, @s_purple, @s_orange, @s_red, @s_green],  bpm_to_period(85), bpm_to_period(170), 25500),
-      circle_cycle(32, [@c_red, @c_green, @c_blue, @c_orange, @c_yellow], bpm_to_period(85), bpm_to_period(100), 25500 + offset(85, 30)),
+      circle_cycle(32, [@c_red, @c_green, @c_blue, @c_orange, @c_yellow], bpm_to_period(85), bpm_to_period(110), 25500 + offset(85, 30)),
 
       switch_random_cycle(50, [@red, @green, @white], bpm_to_period(75), 25500 + offset(85, 62)),
       {110000, :rainbow},

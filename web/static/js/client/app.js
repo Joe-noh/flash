@@ -4,6 +4,7 @@ import socket from "../shared/socket";
 import Cyalume from "./cyalume";
 import Slider from "./slider";
 import Circle from "./circle";
+import Snow from "./snow";
 import MerryChristmas from "./merry_christmas";
 
 let channel = socket.channel("rooms:lobby", {operator: false});
@@ -13,6 +14,7 @@ let cyalume = new Cyalume("#screen");
 let shade   = new Cyalume("#shade");
 let slider  = new Slider(".slide1", ".slide2");
 let circle  = new Circle("#circle", "#screen");
+let snow    = new Snow("#snow");
 
 let applyFlash = (params) => {
   switch(params.type) {
@@ -23,6 +25,7 @@ let applyFlash = (params) => {
     cyalume.switches(params.color);
     break;
   case "switch_random":
+    snow.fallStart();
     cyalume.switchesRandomly(params.colors);
     circle.getAway();
     break;

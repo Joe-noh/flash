@@ -10,5 +10,6 @@ and<br/>
 Please Wait.
 </p>
 <div id="shade"></div>
+<div id="snow"></div>
 
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

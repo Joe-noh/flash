@@ -56,6 +56,48 @@ html, body {
   z-index: 10;
 }
 
+#snow {
+  width:  100%;
+  height: 100%;
+
+  background-image: url('/images/snow1.png'), url('/images/snow2.png'), url('/images/snow3.png');
+
+  background-size: 50% 25%;
+  -webkit-background-size: 50% 25%;
+  -moz-background-size: 50% 25%;
+  -o-background-size: 50% 25%;
+  -ms-background-size: 50% 25%;
+
+  position: absolute;
+
+  z-index: 100;
+
+  -webkit-animation: snow 10s linear infinite;
+  -moz-animation: snow 10s linear infinite;
+  -ms-animation: snow 10s linear infinite;
+  animation: snow 10s linear infinite;
+}
+@keyframes snow {
+  0% {background-position: 0% 0%, 0% 0%, 0% 0%;}
+  50% {background-position: 50% 50%, 50% 100%, -50% 50%;}
+  100% {background-position: 100% 100%, 100% 200%, -100% 100%;}
+}
+@-moz-keyframes snow {
+  0% {background-position: 0% 0%, 0% 0%, 0% 0%;}
+  50% {background-position: 50% 50%, 50% 100%, -50% 50%;}
+  100% {background-position: 100% 100%, 100% 200%, -100% 100%;}
+}
+@-webkit-keyframes snow {
+  0% {background-position: 0% 0%, 0% 0%, 0% 0%;}
+  50% {background-position: 50% 50%, 50% 100%, -50% 50%;}
+  100% {background-position: 100% 100%, 100% 200%, -100% 100%;}
+}
+@-ms-keyframes snow {
+  0% {background-position: 0% 0%, 0% 0%, 0% 0%;}
+  50% {background-position: 50% 50%, 50% 100%, -50% 50%;}
+  100% {background-position: 100% 100%, 100% 200%, -100% 100%;}
+}
+
 #please-wait {
   color: #eee;
   font-size: 16pt;
@@ -74,7 +116,7 @@ html, body {
   margin-left: -9em;
 
   display: none;
-  z-index: 100;
+  z-index: 1000;
 }
 
 #start-button {
@@ -87,7 +129,7 @@ html, body {
   height: 3em;
 
   display: block;
-  z-index: 1000;
+  z-index: 2000;
   position: absolute;
 
   top: 50%;
