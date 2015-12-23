@@ -26,7 +26,7 @@ class Circle {
       height: larger,
       top:    initTop - larger/2,
       left:   initLeft - larger/2
-    }, duration, () => {
+    }, duration, "ease-out", () => {
       this.backDom.css('backgroundColor', color);
     });
   }
